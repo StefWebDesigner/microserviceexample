@@ -1,0 +1,15 @@
+com\MicroservicesSpringExample\repository\UserRepository.class
+com\MicroservicesSpringExample\entity\User.class
+com\MicroservicesSpringExample\exceptions\classExceptions\AdminPrivalgesException.class
+com\MicroservicesSpringExample\exceptions\classExceptions\CredentialsException.class
+com\MicroservicesSpringExample\exceptions\classExceptions\UserExceptions.class
+com\MicroservicesSpringExample\entity\enums\Roles.class
+fraud\FraudApplication.class
+com\MicroservicesSpringExample\SpringApplicationContext.class
+com\MicroservicesSpringExample\controller\UserController.class
+com\MicroservicesSpringExample\service\UserService.class
+com\MicroservicesSpringExample\service\UserServiceImp.class
+com\MicroservicesSpringExample\exceptions\classExceptions\GeneralException.class
+com\MicroservicesSpringExample\security\SecurityConstants.class
+com\MicroservicesSpringExample\UserApplication.class
+com\MicroservicesSpringExample\exceptions\GlobalExceptionsHandler.class

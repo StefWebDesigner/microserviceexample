@@ -1,38 +1,46 @@
-#services :
-#    postgres :
-#        container_name : postgres
-#        image : postgres
-#        enviroment :
-#            POSTGRES_USER  : postgres
-#            POSTGRES_PASSWORD : admin
-#            PGDATA : /data/postgres
-#        volumes :
-#            - postgres:/data/postgres
-#        ports:
-#            "5432:5432"
-#        networks:
-#            - postgres
-#        restart : unless-stopped
-#
-#    pgadmin :
-#        container_name: pgadmin
-#        image : dpage/pgadmin4
-#        environment :
-#            PGADMIN_DEFAULT_EMAIL : ${PGADMIN_DEFAULT_EMAIL:-pgadmin4}
-#            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin4}
-#            PGADMIN_CONFIG_SERVER_MODE : 'False'
-#        volumes:
-#         - pgadmin:/var/lib/pgadmin
-#        posts :
-#            - "5050:80"
-#        networks :
-#            - postgres
-#        restart : unless-stopped
-#
-#        networks :
-#            postgres:
-#            driver : bridge
-#
-#        volumes :
-#            postgres :
-#            pgadmin :
+services:
+# The main container that houses everything 
+    postgres:
+        container_name: postgres
+        image: postgres
+        environment:
+            POSTGRES_USER: amigoscode
+            POSTGRES_PASSWORD: password
+            PGDATA: /data/postgres
+        volumes:
+            - postgres:/data/postgres
+        ports:
+            - "5435:5432"
+
+     #   local app + this container database =>  jdbc:postgresql://localhost:5435/customer
+     #   container app + this container database =>  jdbc:postgresql://postgres:5432/customer
+
+        networks:
+            - postgres
+        restart: unless-stopped
+        # Connecting with the postgres container with help of the networks
+    pgadmin:
+        container_name: pgadmin
+        image: dpage/pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+            PGADMIN_CONFIG_SERVER_MODE: 'False'
+        volumes:
+            - pgadmin:/var/lib/pgadmin
+        # The address for accessing the local broswer with localhost
+        ports:
+            - "5054:80"
+        networks:
+            - postgres
+        restart: unless-stopped
+#this is the netoworks allows for communication between the two netoworks
+networks:
+    postgres:
+        driver: bridge
+
+
+
+volumes:
+    postgres:
+    pgadmin:
